@@ -95,6 +95,13 @@ Load Command line arguments
 				   help();
 				    break;
 
+ 				case 'v' :
+ 				   help();
+					break;
+
+ 				case 'V' :
+ 				   help();
+ 				    break;
 				}
 
 			}

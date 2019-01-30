@@ -262,7 +262,7 @@ Lets setup the server side and wait for a connection
 
 /*
 ================================================================================
-The end of the program  test
+The end of the program
 ================================================================================
  */
 

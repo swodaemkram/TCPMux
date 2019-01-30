@@ -21,16 +21,15 @@
 #include <sys/stat.h>
 #include <time.h>
 
-#define BUFLEN 1024
 #define VER "v 0.14.0\n"
 
 
 void help(); /* print help */
 
-void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1, char TX_DATA); /* Host 1 Communications */
-void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2, char TX_DATA); /* Host 2 Communications */
-void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3, char TX_DATA); /* Host 3 Communications */
-void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4, char TX_DATA); /* Host 4 Communications */
+void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1, char TX_DATA); /* Host 1 Communications these will be bidirectional eventually */
+void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2, char TX_DATA); /* Host 2 Communications these will be bidirectional eventually */
+void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3, char TX_DATA); /* Host 3 Communications these will be bidirectional eventually */
+void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4, char TX_DATA); /* Host 4 Communications these will be bidirectional eventually */
 
 
 int main(int argc, char *argv[]) {
@@ -43,8 +42,6 @@ int PORT1;
 int PORT2;
 int PORT3;
 int PORT4;
-
-
 
 /*
 =============================================================================
@@ -107,8 +104,6 @@ Load Command line arguments
 			}
 
 		}
-
-
 /*
 =============================================================================
 Command line arguments Loaded
@@ -216,7 +211,6 @@ This is what we are working with let's print it
 Lets setup the server side and wait for a connection
 ==============================================================================
 */
-
 	int socket_desc , client_sock , c , read_size;
 		struct sockaddr_in server , client;
 		char client_message[2000];

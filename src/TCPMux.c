@@ -2,7 +2,7 @@
 ============================================================================
  Name        : TCPMux.c
  Author      : Mark Meadows
- Version     :v 0.10.0
+ Version     :v 0.13.0
  Copyright   : Your copyright notice
  Description : TCPMux in C, Ansi-style
 ============================================================================
@@ -22,9 +22,16 @@
 #include <time.h>
 
 #define BUFLEN 1024
-#define VER "v 0.11.0\n"
+#define VER "v 0.13.0\n"
+
 
 void help(); /* print help */
+
+void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1, char TX_DATA); /* Host 1 Communications */
+void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2, char TX_DATA); /* Host 2 Communications */
+void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3, char TX_DATA); /* Host 3 Communications */
+void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4, char TX_DATA); /* Host 4 Communications */
+
 
 int main(int argc, char *argv[]) {
 char SERVER1[21] = {0}; /*Blank these variables*/
@@ -36,6 +43,9 @@ int PORT1;
 int PORT2;
 int PORT3;
 int PORT4;
+
+
+
 /*
 =============================================================================
 Load Command line arguments
@@ -263,27 +273,21 @@ Lets setup the server side and wait for a connection
 ===============================================================================
 */
 
+void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1, char TX_DATA){
 
+}
 
+void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2, char TX_DATA){
 
+}
 
+void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3, char TX_DATA){
 
+}
 
+void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4, char TX_DATA){
 
-
-
-
-
-
-
-
-
-
-/*
-================================================================================
-The end of the program
-================================================================================
-*/
+}
 
 /*
 ==============================================================================

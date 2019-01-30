@@ -2,7 +2,7 @@
 ============================================================================
  Name        : TCPMux.c
  Author      : Mark Meadows
- Version     :v 0.13.0
+ Version     :v 0.14.0
  Copyright   : Your copyright notice
  Description : TCPMux in C, Ansi-style
 ============================================================================
@@ -22,7 +22,7 @@
 #include <time.h>
 
 #define BUFLEN 1024
-#define VER "v 0.13.0\n"
+#define VER "v 0.14.0\n"
 
 
 void help(); /* print help */
@@ -306,7 +306,7 @@ void help(void){
 	printf("\n");
 	printf("     TCPMux by Mark Meadows %s \n", VER);
 	printf("     a command line TCP Multiplexer\n");
-	printf(" There must be a minimum of two host being relayed to\n" );
+	printf(" There must be a minimum of two host being relayed\n" );
 	printf(" -P, port of incoming TCP connection \n");
 	printf(" -1, first ip address and port for outgoing connection\n");
 	printf(" -2, second ip address and port for outgoing connection\n");

@@ -168,19 +168,6 @@ Lets Detach the ports from the IPs
 Done with Detaching Ports
 ==============================================================================
 ==============================================================================
-This is what we are working with let's print it
-==============================================================================
-*/
-	printf("\n");
-	printf("IN_PORT = %s\n",IN_PORT);
-	printf("HOST1 = %s:%i\n",HOST1,PORT1);
-	printf("HOST2 = %s:%i\n",HOST2,PORT2);
-	printf("HOST3 = %s:%i\n",HOST3,PORT3);
-	printf("HOST4 = %s:%i\n",HOST4,PORT4);
-	printf("\n");
-
-/*
-==============================================================================
 Lets Figure out were we are sending things
 ==============================================================================
 */
@@ -198,6 +185,26 @@ if (atoi(HOST4) > 1 ){
 ==============================================================================
 Now we know who we are sending things to
 ==============================================================================
+==============================================================================
+This is what we are working with let's print it
+==============================================================================
+*/
+	printf("\n");
+	printf("IN_PORT = %s\n",IN_PORT);
+	printf("HOST1 = %s:%i\n",HOST1,PORT1);
+	printf("HOST2 = %s:%i\n",HOST2,PORT2);
+
+	if(HOST3_USED == 1){
+		printf("HOST3 = %s:%i\n",HOST3,PORT3);
+		}
+
+	if(HOST4_USED == 1){
+		printf("HOST4 = %s:%i\n",HOST4,PORT4);
+		}
+
+	printf("\n");
+
+/*
 ==============================================================================
 Lets setup the server side and wait for a connection
 ==============================================================================

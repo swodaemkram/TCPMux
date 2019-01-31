@@ -213,7 +213,7 @@ This is what we are working with let's print it
 Lets setup the server side and wait for a connection
 ==============================================================================
 */
-	int socket_desc , client_sock , c , read_size;
+	    int socket_desc , client_sock , c , read_size;
 		struct sockaddr_in server , client;
 		char client_message[2000];
 
@@ -254,8 +254,13 @@ Lets setup the server side and wait for a connection
 				perror("accept failed");
 				return 1;
 			}
-			puts("Connection accepted");
 
+/*
+==============================================================================
+Accept in coming connection and prepare outgoing connections
+==============================================================================
+ */
+			puts("Connection accepted");
 			CONNECTION_STATUS = 1;
 			host1_comm(CONNECTION_STATUS, PORT1, HOST1, TX_DATA);
 			host2_comm(CONNECTION_STATUS, PORT2, HOST2, TX_DATA);
@@ -269,19 +274,73 @@ Lets setup the server side and wait for a connection
 
 					host4_comm(CONNECTION_STATUS, PORT4, HOST4, TX_DATA);
 			}
+/*
+================================================================================
+Accepted in coming connection and outgoing connections have been handled
+================================================================================
+================================================================================
+Pass in coming data to clients
+================================================================================
 
-
+ */
 			//Receive a message from client
 				while( (read_size = recv(client_sock , client_message , 2000 , 0)) > 0 )
 				{
 					//Send the message back to client
-					write(client_sock , client_message , strlen(client_message));
-				}
+					//write(client_sock , client_message , strlen(client_message));
 
+				strncpy(TX_DATA,client_message, strlen(client_message));
+
+				host1_comm(CONNECTION_STATUS, PORT1, HOST1, TX_DATA);
+				host2_comm(CONNECTION_STATUS, PORT2, HOST2, TX_DATA);
+
+				if (HOST3_USED == 1){
+
+						host3_comm(CONNECTION_STATUS, PORT3, HOST3, TX_DATA);
+					}
+
+				if (HOST4_USED == 1){
+
+						host4_comm(CONNECTION_STATUS, PORT4, HOST4, TX_DATA);
+					}
+
+				memset(TX_DATA, '\0', sizeof(TX_DATA));
+				memset(client_message, '\0', sizeof(client_message));
+				}
+/*
+==================================================================================
+In coming data has been passed to clients
+==================================================================================
+==================================================================================
+Deal with in coming disconnect
+==================================================================================
+*/
 				if(read_size == 0)
 				{
 					puts("Client disconnected");
 					fflush(stdout);
+					CONNECTION_STATUS = 0;
+
+				host1_comm(CONNECTION_STATUS, PORT1, HOST1, TX_DATA);
+		    	host2_comm(CONNECTION_STATUS, PORT2, HOST2, TX_DATA);
+
+				if (HOST3_USED == 1){
+
+					host3_comm(CONNECTION_STATUS, PORT3, HOST3, TX_DATA);
+				}
+
+				if (HOST4_USED == 1){
+
+					host4_comm(CONNECTION_STATUS, PORT4, HOST4, TX_DATA);
+
+				}
+
+
+/*
+==================================================================================
+Disconnect Handeled
+==================================================================================
+*/
 				}
 				else if(read_size == -1)
 				{

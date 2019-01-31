@@ -405,14 +405,14 @@ void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2[], char TX_DATA[]){
 
 void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3[], char TX_DATA[]){
 
-	printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT3, HOST3, TX_DATA);
+	//printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT3, HOST3, TX_DATA);
 	return;
 
 }
 
 void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4[], char TX_DATA[]){
 
-	printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT4, HOST4, TX_DATA);
+	//printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT4, HOST4, TX_DATA);
 	return;
 
 }

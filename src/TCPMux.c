@@ -26,10 +26,10 @@
 
 void help(); /* print help */
 
-void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1, char TX_DATA); /* Host 1 Communications these will be bidirectional eventually */
-void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2, char TX_DATA); /* Host 2 Communications these will be bidirectional eventually */
-void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3, char TX_DATA); /* Host 3 Communications these will be bidirectional eventually */
-void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4, char TX_DATA); /* Host 4 Communications these will be bidirectional eventually */
+void host1_comm(int CONNECTION_STATUS, int PORT1, char *HOST1, char *TX_DATA ); /* Host 1 Communications these will be bidirectional eventually */
+void host2_comm(int CONNECTION_STATUS, int PORT2, char *HOST2, char *TX_DATA ); /* Host 2 Communications these will be bidirectional eventually */
+void host3_comm(int CONNECTION_STATUS, int PORT3, char *HOST3, char *TX_DATA ); /* Host 3 Communications these will be bidirectional eventually */
+void host4_comm(int CONNECTION_STATUS, int PORT4, char *HOST4, char *TX_DATA ); /* Host 4 Communications these will be bidirectional eventually */
 
 
 int main(int argc, char *argv[]) {
@@ -42,6 +42,8 @@ int PORT1;
 int PORT2;
 int PORT3;
 int PORT4;
+int CONNECTION_STATUS = 0;
+char TX_DATA[2000] = {0};
 
 /*
 =============================================================================
@@ -254,6 +256,20 @@ Lets setup the server side and wait for a connection
 			}
 			puts("Connection accepted");
 
+			CONNECTION_STATUS = 1;
+			host1_comm(CONNECTION_STATUS, PORT1, HOST1, TX_DATA);
+			host2_comm(CONNECTION_STATUS, PORT2, HOST2, TX_DATA);
+
+			if (HOST3_USED == 1){
+
+					host3_comm(CONNECTION_STATUS, PORT3, HOST3, TX_DATA);
+			}
+
+			if (HOST4_USED == 1){
+
+					host4_comm(CONNECTION_STATUS, PORT4, HOST4, TX_DATA);
+			}
+
 
 			//Receive a message from client
 				while( (read_size = recv(client_sock , client_message , 2000 , 0)) > 0 )
@@ -281,19 +297,30 @@ Lets setup the server side and wait for a connection
 ===============================================================================
 */
 
-void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1, char TX_DATA){
+void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1[], char TX_DATA[]){
+
+	printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT1, HOST1, TX_DATA);
+	return;
+}
+
+void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2[], char TX_DATA[]){
+
+	printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT2, HOST2, TX_DATA);
+	return;
 
 }
 
-void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2, char TX_DATA){
+void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3[], char TX_DATA[]){
+
+	printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT3, HOST3, TX_DATA);
+	return;
 
 }
 
-void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3, char TX_DATA){
+void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4[], char TX_DATA[]){
 
-}
-
-void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4, char TX_DATA){
+	printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT4, HOST4, TX_DATA);
+	return;
 
 }
 

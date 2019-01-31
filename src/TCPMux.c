@@ -13,13 +13,13 @@
 #include <string.h>
 #include <arpa/inet.h>
 #include <sys/socket.h>
-#include <sys/types.h>
-#include <netinet/in.h>
-#include <netdb.h>
+//#include <sys/types.h>
+//#include <netinet/in.h>
+//#include <netdb.h>
 #include <unistd.h>
-#include <errno.h>
-#include <sys/stat.h>
-#include <time.h>
+//#include <errno.h>
+//#include <sys/stat.h>
+//#include <time.h>
 
 #define VER "v 0.99.0\n"
 
@@ -515,7 +515,7 @@ Help Function
 void help(void){
 	printf("\n");
 	printf("     TCPMux by Mark Meadows %s \n", VER);
-	printf("     a command line TCP Multiplexer\n");
+	printf("     a command line unidirectional TCP Multiplexer\n");
 	printf(" There must be a minimum of two host being relayed\n" );
 	printf(" -P, port of incoming TCP connection \n");
 	printf(" -1, first ip address and port for outgoing connection\n");

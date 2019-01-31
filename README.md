@@ -1,5 +1,5 @@
 # TCPMux
-A Linux cli program to accept an IP connection and transmit that data to several other clients 
+A Linux cli program to accept an IP connection and transmit that data to several other clients. Up to a maximum of 4.
 
 
 	     TCPMux by Mark Meadows 

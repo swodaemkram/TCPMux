@@ -2,7 +2,7 @@
 ============================================================================
  Name        : TCPMux.c
  Author      : Mark Meadows
- Version     :v 0.14.0
+ Version     :v 0.99.0
  Copyright   : Your copyright notice
  Description : TCPMux in C, Ansi-style
 ============================================================================
@@ -21,7 +21,7 @@
 #include <sys/stat.h>
 #include <time.h>
 
-#define VER "v 0.14.0\n"
+#define VER "v 0.99.0\n"
 
 
 void help(); /* print help */
@@ -244,7 +244,7 @@ Lets setup the server side and wait for a connection
 				listen(socket_desc , 3);
 
 			//Accept and incoming connection
-			puts("Waiting for incoming connections...");
+			printf("Waiting for incoming connection on port %s...\n",IN_PORT);
 			c = sizeof(struct sockaddr_in);
 
 			//accept connection from an incoming client
@@ -359,6 +359,7 @@ Disconnect Handeled
 
 void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1[], char TX_DATA[]){
 
+
 	int sock;
 	struct sockaddr_in server;
 	//printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT1, HOST1, TX_DATA);
@@ -366,7 +367,7 @@ void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1[], char TX_DATA[]){
 	sock = socket(AF_INET , SOCK_STREAM , 0);
 		if (sock == -1)
 		{
-			printf("Could not create socket");
+			printf("Host 1 Could not create socket");
 		}
 		//puts("Socket created");
 
@@ -376,43 +377,131 @@ void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1[], char TX_DATA[]){
 				return;
 		}
 
-		server.sin_addr.s_addr = INADDR_ANY;
+		server.sin_addr.s_addr = inet_addr(HOST1);
 		server.sin_family = AF_INET;
 		server.sin_port = htons(PORT1);
 
 		//Connect to remote server
 		if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0)
-		{
-			perror("connect failed. Error");
-			return ;
-		}
+			{
+				perror("Host 1 connect failed. Error");
+			}
 
-		puts("Host 1 Connected\n");
-
+		printf("\nHost 1 Connected");
 		send(sock , TX_DATA , strlen(TX_DATA),0);
-		printf("Sent ...%s\n",TX_DATA);
-		return;
+		printf(" Sending ... %s\n",TX_DATA);
 
 
+	return;
 }
 
 void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2[], char TX_DATA[]){
 
+	int sock;
+	struct sockaddr_in server;
 	//printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT2, HOST2, TX_DATA);
+	sock = socket(AF_INET , SOCK_STREAM , 0);
+			if (sock == -1)
+			{
+				printf("Host 2 Could not create socket");
+			}
+			//puts("Socket created");
+
+			if(CONNECTION_STATUS == 0){
+					close(sock);
+					puts("Host 2 Dissconected");
+					return;
+			}
+
+			server.sin_addr.s_addr = inet_addr(HOST2);
+			server.sin_family = AF_INET;
+			server.sin_port = htons(PORT2);
+
+			//Connect to remote server
+			if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0)
+			{
+				perror("Host 2 connect failed. Error");
+				return ;
+			}
+
+			printf("\nHost 2 Connected");
+			send(sock , TX_DATA , strlen(TX_DATA),0);
+			printf("Sending ... %s\n",TX_DATA);
+
 	return;
 
 }
 
 void host3_comm(int CONNECTION_STATUS, int PORT3, char HOST3[], char TX_DATA[]){
-
+	int sock;
+	struct sockaddr_in server;
 	//printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT3, HOST3, TX_DATA);
+
+	sock = socket(AF_INET , SOCK_STREAM , 0);
+				if (sock == -1)
+				{
+					printf("Host 3 Could not create socket");
+				}
+				//puts("Socket created");
+
+				if(CONNECTION_STATUS == 0){
+						close(sock);
+						puts("Host 3 Dissconected");
+						return;
+				}
+
+				server.sin_addr.s_addr = inet_addr(HOST3);
+				server.sin_family = AF_INET;
+				server.sin_port = htons(PORT3);
+
+				//Connect to remote server
+				if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0)
+				{
+					perror("Host 3 connect failed. Error");
+					return ;
+				}
+
+				printf("\nHost 3 Connected");
+				send(sock , TX_DATA , strlen(TX_DATA),0);
+				printf("Sending ... %s\n",TX_DATA);
+
 	return;
 
 }
 
 void host4_comm(int CONNECTION_STATUS, int PORT4, char HOST4[], char TX_DATA[]){
-
+	int sock;
+	struct sockaddr_in server;
 	//printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT4, HOST4, TX_DATA);
+
+	sock = socket(AF_INET , SOCK_STREAM , 0);
+					if (sock == -1)
+					{
+						printf("Host 4 Could not create socket");
+					}
+					//puts("Socket created");
+
+					if(CONNECTION_STATUS == 0){
+							close(sock);
+							puts("Host 4 Dissconected");
+							return;
+					}
+
+					server.sin_addr.s_addr = inet_addr(HOST4);
+					server.sin_family = AF_INET;
+					server.sin_port = htons(PORT4);
+
+					//Connect to remote server
+					if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0)
+					{
+						perror("Host 4 connect failed. Error");
+						return ;
+					}
+
+					printf("\nHost 4 Connected");
+					send(sock , TX_DATA , strlen(TX_DATA),0);
+					printf("Sending ... %s\n",TX_DATA);
+
 	return;
 
 }

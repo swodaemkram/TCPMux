@@ -262,6 +262,7 @@ Accept in coming connection and prepare outgoing connections
  */
 			puts("Connection accepted");
 			CONNECTION_STATUS = 1;
+
 			host1_comm(CONNECTION_STATUS, PORT1, HOST1, TX_DATA);
 			host2_comm(CONNECTION_STATUS, PORT2, HOST2, TX_DATA);
 
@@ -358,13 +359,46 @@ Disconnect Handeled
 
 void host1_comm(int CONNECTION_STATUS, int PORT1, char HOST1[], char TX_DATA[]){
 
-	printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT1, HOST1, TX_DATA);
-	return;
+	int sock;
+	struct sockaddr_in server;
+	//printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT1, HOST1, TX_DATA);
+
+	sock = socket(AF_INET , SOCK_STREAM , 0);
+		if (sock == -1)
+		{
+			printf("Could not create socket");
+		}
+		//puts("Socket created");
+
+		if(CONNECTION_STATUS == 0){
+				close(sock);
+				puts("Host 1 Dissconected");
+				return;
+		}
+
+		server.sin_addr.s_addr = INADDR_ANY;
+		server.sin_family = AF_INET;
+		server.sin_port = htons(PORT1);
+
+		//Connect to remote server
+		if (connect(sock , (struct sockaddr *)&server , sizeof(server)) < 0)
+		{
+			perror("connect failed. Error");
+			return ;
+		}
+
+		puts("Host 1 Connected\n");
+
+		send(sock , TX_DATA , strlen(TX_DATA),0);
+		printf("Sent ...%s\n",TX_DATA);
+		return;
+
+
 }
 
 void host2_comm(int CONNECTION_STATUS, int PORT2, char HOST2[], char TX_DATA[]){
 
-	printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT2, HOST2, TX_DATA);
+	//printf("\nConnection_Status = %i Port to use = %i Host = %s TX_DATA = %s\n",CONNECTION_STATUS,PORT2, HOST2, TX_DATA);
 	return;
 
 }
